@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SmartTools Pakistan: free online writing and creator tools in Urdu and English.">
+<title>SmartTools Pakistan — Free Online Tools</title>
+<style>
+:root{--bg:#f5f6fc;--card:#fff;--ink:#172033;--muted:#65718a;--brand:#5858d9;--line:#e5e8f1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(125deg,#3435a8,#7777f2);color:white;padding:30px 16px 42px;text-align:center}
+header h1{margin:0;font-size:clamp(2rem,6vw,3rem)}header p{margin:6px auto 0;max-width:650px;color:#ededff}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}nav a{color:white;text-decoration:none;border:1px solid #ffffff66;border-radius:99px;padding:6px 12px;font-size:.9rem}
+main{max-width:1000px;margin:-18px auto 36px;padding:0 14px}
+.intro,.card,.ad{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:15px;box-shadow:0 6px 22px #1c24520a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:14px}
+.card h2{font-size:1.15rem;margin:0 0 4px}.muted{color:var(--muted);font-size:.91rem;margin:0 0 12px}
+textarea,input{width:100%;border:1px solid #d8ddeb;border-radius:10px;padding:12px;font:inherit;background:#fff;color:var(--ink);outline:none}
+textarea{min-height:130px;resize:vertical}textarea:focus,input:focus{border-color:var(--brand);box-shadow:0 0 0 3px #5858d91c}
+button{background:var(--brand);color:white;border:0;border-radius:9px;padding:10px 13px;margin:7px 5px 0 0;font:inherit;font-weight:650;cursor:pointer}
+button.secondary{background:#eceeff;color:#3738a6}button:hover{filter:brightness(.96)}
+.row{display:flex;gap:7px;flex-wrap:wrap}.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.stat{background:#f0f1ff;border-radius:10px;padding:8px 11px;font-size:.85rem}.stat b{display:block;color:#4142b8;font-size:1.1rem}
+.ad{border:1px dashed #b7bfd1;text-align:center;color:var(--muted);font-size:.86rem;box-shadow:none}
+.note{font-size:.88rem;color:var(--muted)}footer{text-align:center;padding:22px;color:var(--muted);font-size:.9rem}
+.tool-result{margin-top:10px;padding:10px;border-radius:9px;background:#f2f3ff;white-space:pre-wrap;overflow-wrap:anywhere}
+section[id]{scroll-margin-top:12px}
+@media(max-width:480px){header{padding-top:24px}.intro,.card{padding:15px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>SmartTools Pakistan</h1>
+  <p>Free, simple tools for students, creators and everyday work.</p>
+  <nav><a href="#writing">Writing tools</a><a href="#creator">Creator tools</a><a href="#about">About</a></nav>
+</header>
+<main>
+  <div class="intro"><b>Welcome! خوش آمدید</b><div class="note">Use these tools free in your browser. Your text stays on your device; it is not uploaded by this page.</div></div>
+  <div class="ad">Advertisement space — ads are not active. Apply to an ad network separately if eligible.</div>
+  <section id="writing" class="grid">
+    <article class="card" style="grid-column:1/-1">
+      <h2>Word & Character Counter</h2><p class="muted">Count words, characters and sentences in Urdu or English text.</p>
+      <textarea id="countText" placeholder="اپنا متن یہاں لکھیں یا پیسٹ کریں..."></textarea>
+      <div class="stats"><div class="stat"><b id="words">0</b>Words</div><div class="stat"><b id="chars">0</b>Characters</div><div class="stat"><b id="noSpaces">0</b>Without spaces</div><div class="stat"><b id="sentences">0</b>Sentences</div></div>
+    </article>
+    <article class="card">
+      <h2>Text Case Converter</h2><p class="muted">Convert English text to uppercase, lowercase or title case.</p>
+      <textarea id="caseText" placeholder="Enter English text..."></textarea>
+      <div class="row"><button onclick="caseConvert('upper')">UPPERCASE</button><button onclick="caseConvert('lower')">lowercase</button><button onclick="caseConvert('title')">Title Case</button><button class="secondary" onclick="copyFrom('caseText')">Copy</button></div>
+    </article>
+    <article class="card">
+      <h2>Text Cleaner</h2><p class="muted">Remove extra spaces and tidy pasted text.</p>
+      <textarea id="cleanText" placeholder="Paste text with extra spaces..."></textarea>
+      <div class="row"><button onclick="cleanText()">Clean text</button><button class="secondary" onclick="copyFrom('cleanText')">Copy</button></div>
+    </article>
+  </section>
+  <section id="creator" class="grid" style="margin-top:14px">
+    <article class="card">
+      <h2>YouTube Title Ideas</h2><p class="muted">Create editable title ideas from your video topic. These are suggestions, not guaranteed viral titles.</p>
+      <input id="topic" placeholder="Enter your video topic">
+      <div class="row"><button onclick="makeTitles()">Generate ideas</button></div>
+      <div id="titleResults" class="tool-result" hidden></div>
+    </article>
+    <article class="card">
+      <h2>Hashtag Helper</h2><p class="muted">Turn a topic into simple hashtags.</p>
+      <input id="tagTopic" placeholder="e.g. cooking, study tips">
+      <div class="row"><button onclick="makeTags()">Make hashtags</button><button class="secondary" onclick="copyResult('tagResults')">Copy</button></div>
+      <div id="tagResults" class="tool-result" hidden></div>
+    </article>
+  </section>
+  <section class="card" style="margin-top:14px">
+    <h2>Urdu & English Translator</h2>
+    <p class="muted">A real translator needs a translation service. This free starter page does not pretend to translate automatically. You can use the link below.</p>
+    <a href="https://translate.google.com/" target="_blank" rel="noopener">Open Google Translate</a>
+  </section>
+  <div class="ad">Advertisement space — add approved ad code only after your site meets the ad network's requirements.</div>
+  <section id="about" class="card">
+    <h2>About SmartTools Pakistan</h2>
+    <p class="muted">A small collection of free browser-based helpers. More useful tools and original guides can be added as the site grows.</p>
+    <p class="note"><b>Important:</b> This is a starter website file, not a live published website. It does not currently include paid AI APIs, server-side PDF conversion, user accounts, or active advertisements. Never promise users guaranteed earnings or results.</p>
+  </section>
+</main>
+<footer>© <span id="year"></span> SmartTools Pakistan</footer>
+<script>
+const $=id=>document.getElementById(id);
+$('countText').addEventListener('input',()=>{
+ const t=$('countText').value;
+ $('words').textContent=(t.trim().match(/\S+/gu)||[]).length;
+ $('chars').textContent=[...t].length;
+ $('noSpaces').textContent=[...t.replace(/\s/gu,'')].length;
+ $('sentences').textContent=(t.match(/[.!؟?۔]+(?=\s|$)/gu)||[]).length;
+});
+function caseConvert(type){let e=$('caseText');if(type==='upper')e.value=e.value.toUpperCase();if(type==='lower')e.value=e.value.toLowerCase();if(type==='title')e.value=e.value.toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase())}
+function cleanText(){ $('cleanText').value=$('cleanText').value.replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').trim() }
+async function copyFrom(id){try{await navigator.clipboard.writeText($(id).value);alert('Copied!')}catch(e){$(id).select();document.execCommand('copy');alert('Copied!')}}
+function copyResult(id){let t=$(id).textContent;if(!t)return; if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>alert('Copied!')).catch(()=>alert(t));else alert(t)}
+function makeTitles(){let t=$('topic').value.trim();if(!t){alert('Please enter a topic first.');return}let ideas=[`5 Things You Should Know About ${t}`,`${t}: Beginner's Guide`, `I Tried ${t} — Here's What I Learned`, `How to Get Started with ${t}`,`${t} Tips That Can Help You`];$('titleResults').hidden=false;$('titleResults').textContent=ideas.join('\n')}
+function makeTags(){let t=$('tagTopic').value.trim();if(!t){alert('Please enter a topic first.');return}let words=t.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);$('tagResults').hidden=false;$('tagResults').textContent=[...new Set(words.map(w=>'#'+w))].join(' ')}
+$('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
